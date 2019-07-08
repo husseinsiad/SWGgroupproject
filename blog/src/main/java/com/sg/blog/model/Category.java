@@ -5,43 +5,73 @@
  */
 package com.sg.blog.model;
 
+import java.util.List;
+import java.util.Objects;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 /**
  *
  * @author harun
  */
 public class Category {
+
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    
     private int categoryid;
+    
+    @Column(nullable = false)
     private String name;
 
-    /**
-     * @return the categoryid
-     */
     public int getCategoryid() {
         return categoryid;
     }
 
-    /**
-     * @param categoryid the categoryid to set
-     */
     public void setCategoryid(int categoryid) {
         this.categoryid = categoryid;
     }
 
-    /**
-     * @return the name
-     */
     public String getName() {
         return name;
     }
 
-    /**
-     * @param name the name to set
-     */
     public void setName(String name) {
         this.name = name;
     }
     
-    
+ @ManyToMany
+ @JoinTable(name = "post_category",
+joinColumns = {@JoinColumn(name = "categoryid")},
+ inverseJoinColumns = {@JoinColumn(name = "postid")})
+ private List<Post> post;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.categoryid;
+        hash = 53 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Category other = (Category) obj;
+        return true;
+    }
 
 }
-
