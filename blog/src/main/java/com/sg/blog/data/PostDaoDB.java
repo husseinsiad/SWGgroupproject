@@ -5,19 +5,10 @@
  */
 package com.sg.blog.data;
 
-import com.sg.blog.model.Post;
-import java.util.List;
-
 /**
  *
  * @author hause
  */
-public interface PostDao {
-    
-    List<Post> getAllPosts();
-    Post getPostById(int id);
-    Post addPost(Post post);
-    void updatePost(Post post);
-    void deletePost(int id);
+public class PostDaoDB {
     
 }
