@@ -5,17 +5,16 @@
  */
 package com.sg.blog.data;
 
-import com.sg.blog.model.Post;
-import java.util.List;
+import com.sg.blog.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author hause
+ * @author siyaa
  */
 @Repository
-public interface PostDao  extends JpaRepository<Post, Integer>{
+public interface UserDao extends JpaRepository<User,Integer>{
 
     
 }
