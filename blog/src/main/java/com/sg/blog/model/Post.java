@@ -43,7 +43,9 @@ public class Post {
     
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    private int userid;
+
+    private User user;
+
     
     @ManyToMany
     @JoinTable(name = "post_category",
@@ -52,99 +54,5 @@ public class Post {
     private List<Category> categories;
 
 
-
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(LocalDateTime postDate) {
-        this.postDate = postDate;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getUserId() {
-        return userid;
-    }
-
-    public void setUserId(int userId) {
-        this.userid = userId;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.postId;
-        hash = 67 * hash + Objects.hashCode(this.title);
-        hash = 67 * hash + Objects.hashCode(this.content);
-        hash = 67 * hash + Objects.hashCode(this.postDate);
-        hash = 67 * hash + (this.status ? 1 : 0);
-        hash = 67 * hash + this.userid;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Post other = (Post) obj;
-        if (this.postId != other.postId) {
-            return false;
-        }
-        if (this.status != other.status) {
-            return false;
-        }
-        if (this.userid != other.userid) {
-            return false;
-        }
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
-        if (!Objects.equals(this.content, other.content)) {
-            return false;
-        }
-        if (!Objects.equals(this.postDate, other.postDate)) {
-            return false;
-        }
-        return true;
-    }
-    
     
 }
