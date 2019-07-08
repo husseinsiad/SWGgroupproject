@@ -6,17 +6,15 @@
 package com.sg.blog.data;
 
 import com.sg.blog.model.User;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author siyaa
  */
-public interface UserDao {
-    List<User> getAllUsers();
-    User getUserById(int id);
-    User addUser(User user);
-    void updateUser(User user);
-    void deleteUser(int id);
+@Repository
+public interface UserDao extends JpaRepository<User,Integer>{
+
     
 }

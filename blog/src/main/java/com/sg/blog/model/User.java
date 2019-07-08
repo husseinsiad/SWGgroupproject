@@ -23,10 +23,13 @@ public class User {
     @Id
     @javax.persistence.Id
     private int userid;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String userName;
+    @Column
     private String description;
+    @Column(nullable = false)
     private String userType;
+    @Column(nullable = false)
     private String password;
 
     public int getUserid() {
