@@ -10,18 +10,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+
 
 /**
  *
  * @author siyaa
  */
-@Entity
+@Entity(name="users")
 public class User {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @javax.persistence.Id
     private int userid;
     @Column(nullable = false)
     private String userName;

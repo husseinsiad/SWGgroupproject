@@ -43,13 +43,13 @@ public class Post {
     
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    private int userId;
+    private int userid;
     
-//    @ManyToMany
-//    @JoinTable(name = "post_category",
-//            joinColumns = {@JoinColumn(name = "postid")},
-//            inverseJoinColumns = {@JoinColumn(name = "categoryid")})
-//    private List<Category> categories;
+    @ManyToMany
+    @JoinTable(name = "post_category",
+            joinColumns = {@JoinColumn(name = "postid")},
+            inverseJoinColumns = {@JoinColumn(name = "categoryid")})
+    private List<Category> categories;
 
 
 
@@ -94,11 +94,11 @@ public class Post {
     }
 
     public int getUserId() {
-        return userId;
+        return userid;
     }
 
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.userid = userId;
     }
     
     @Override
@@ -109,7 +109,7 @@ public class Post {
         hash = 67 * hash + Objects.hashCode(this.content);
         hash = 67 * hash + Objects.hashCode(this.postDate);
         hash = 67 * hash + (this.status ? 1 : 0);
-        hash = 67 * hash + this.userId;
+        hash = 67 * hash + this.userid;
         return hash;
     }
 
@@ -131,7 +131,7 @@ public class Post {
         if (this.status != other.status) {
             return false;
         }
-        if (this.userId != other.userId) {
+        if (this.userid != other.userid) {
             return false;
         }
         if (!Objects.equals(this.title, other.title)) {
