@@ -43,108 +43,14 @@ public class Post {
     
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-    private int userId;
+    private User user;
     
-//    @ManyToMany
-//    @JoinTable(name = "post_category",
-//            joinColumns = {@JoinColumn(name = "postid")},
-//            inverseJoinColumns = {@JoinColumn(name = "categoryid")})
-//    private List<Category> categories;
+    @ManyToMany
+    @JoinTable(name = "post_category",
+            joinColumns = {@JoinColumn(name = "postid")},
+            inverseJoinColumns = {@JoinColumn(name = "categoryid")})
+    private List<Category> categories;
 
-
-
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(LocalDateTime postDate) {
-        this.postDate = postDate;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-    
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + this.postId;
-        hash = 67 * hash + Objects.hashCode(this.title);
-        hash = 67 * hash + Objects.hashCode(this.content);
-        hash = 67 * hash + Objects.hashCode(this.postDate);
-        hash = 67 * hash + (this.status ? 1 : 0);
-        hash = 67 * hash + this.userId;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Post other = (Post) obj;
-        if (this.postId != other.postId) {
-            return false;
-        }
-        if (this.status != other.status) {
-            return false;
-        }
-        if (this.userId != other.userId) {
-            return false;
-        }
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
-        if (!Objects.equals(this.content, other.content)) {
-            return false;
-        }
-        if (!Objects.equals(this.postDate, other.postDate)) {
-            return false;
-        }
-        return true;
-    }
-    
+  
     
 }

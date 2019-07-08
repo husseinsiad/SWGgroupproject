@@ -22,8 +22,7 @@ import javax.persistence.ManyToMany;
 public class Category {
 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Id
-    
+    @Id   
     private int categoryid;
     
     @Column(nullable = false)
