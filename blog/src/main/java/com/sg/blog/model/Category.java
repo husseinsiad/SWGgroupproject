@@ -29,7 +29,14 @@ public class Category {
     
     @Column(nullable = false)
     private String name;
+    
+    @ManyToMany
+    @JoinTable(name = "post_category",
+        joinColumns = {@JoinColumn(name = "categoryid")},
+        inverseJoinColumns = {@JoinColumn(name = "postid")})
+    private List<Post> post;
 
+    
     public int getCategoryid() {
         return categoryid;
     }
@@ -45,18 +52,23 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-    
- @ManyToMany
- @JoinTable(name = "post_category",
-joinColumns = {@JoinColumn(name = "categoryid")},
- inverseJoinColumns = {@JoinColumn(name = "postid")})
- private List<Post> post;
 
+    public List<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(List<Post> post) {
+        this.post = post;
+    }
+
+    
+    
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + this.categoryid;
-        hash = 53 * hash + Objects.hashCode(this.name);
+        int hash = 5;
+        hash = 23 * hash + this.categoryid;
+        hash = 23 * hash + Objects.hashCode(this.name);
+        hash = 23 * hash + Objects.hashCode(this.post);
         return hash;
     }
 
@@ -72,7 +84,17 @@ joinColumns = {@JoinColumn(name = "categoryid")},
             return false;
         }
         final Category other = (Category) obj;
+        if (this.categoryid != other.categoryid) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.post, other.post)) {
+            return false;
+        }
         return true;
     }
+
 
 }

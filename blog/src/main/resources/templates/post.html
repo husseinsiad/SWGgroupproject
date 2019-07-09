@@ -11,6 +11,10 @@
 
   <title>Blog Home - Start Bootstrap Template</title>
 
+  <!-- TinyMCE -->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>
+  
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -51,10 +55,12 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container m-lg-5">
+      <div>
 
-
-
+      <textarea>Blog content goes here!</textarea>
+      
+      </div>
   </div>
   <!-- /.container -->
 

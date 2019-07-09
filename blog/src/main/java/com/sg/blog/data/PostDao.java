@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author hause
  */
 @Repository
-public interface PostDao  extends JpaRepository<Post, Integer>{
+public interface PostDao extends JpaRepository<Post, Integer>{
 
     
 }

@@ -23,15 +23,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private int userid;
+    
     @Column(nullable = false)
-    private String userName;
+    private String username;
+    
     @Column
     private String description;
+    
     @Column(nullable = false)
-    private String userType;
+    private String usertype;
+    
     @Column(nullable = false)
     private String password;
 
+    
     public int getUserid() {
         return userid;
     }
@@ -40,12 +45,12 @@ public class User {
         this.userid = userid;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getDescription() {
@@ -56,12 +61,12 @@ public class User {
         this.description = description;
     }
 
-    public String getUserType() {
-        return userType;
+    public String getUsertype() {
+        return usertype;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     public String getPassword() {
@@ -75,11 +80,11 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.userid;
-        hash = 37 * hash + Objects.hashCode(this.userName);
-        hash = 37 * hash + Objects.hashCode(this.description);
-        hash = 37 * hash + Objects.hashCode(this.userType);
-        hash = 37 * hash + Objects.hashCode(this.password);
+        hash = 59 * hash + this.userid;
+        hash = 59 * hash + Objects.hashCode(this.username);
+        hash = 59 * hash + Objects.hashCode(this.description);
+        hash = 59 * hash + Objects.hashCode(this.usertype);
+        hash = 59 * hash + Objects.hashCode(this.password);
         return hash;
     }
 
@@ -98,13 +103,13 @@ public class User {
         if (this.userid != other.userid) {
             return false;
         }
-        if (!Objects.equals(this.userName, other.userName)) {
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.userType, other.userType)) {
+        if (!Objects.equals(this.usertype, other.usertype)) {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
@@ -112,5 +117,6 @@ public class User {
         }
         return true;
     }
+
 
 }
