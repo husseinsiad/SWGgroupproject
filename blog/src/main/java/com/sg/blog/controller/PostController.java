@@ -5,12 +5,11 @@
  */
 package com.sg.blog.controller;
 
+import com.sg.blog.data.CategoryDao;
 import com.sg.blog.data.PostDao;
 import com.sg.blog.data.UserDao;
+import com.sg.blog.model.Category;
 import com.sg.blog.model.User;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import static org.apache.tomcat.jni.Buffer.address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +26,9 @@ public class PostController {
     UserDao userdao;
     @Autowired
     PostDao postdao;
+    
+    @Autowired
+    CategoryDao categorydao;
 
     @GetMapping("index")
     public String index() {
@@ -55,6 +57,18 @@ public class PostController {
     @PostMapping("signup")
     public String registerUser(User user) {
         userdao.save(user);
-        return "redirect:/post";
+        return "redirect:/login";
+    }
+    
+     @GetMapping("category")
+    public String category() {
+        // post
+        return "category";
+    }
+
+    @PostMapping("Category")
+    public String registerCategory(Category category) {
+        categorydao.save(category);
+        return "redirect:/login";
     }
 }
