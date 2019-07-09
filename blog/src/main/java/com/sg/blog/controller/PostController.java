@@ -7,9 +7,14 @@ package com.sg.blog.controller;
 
 import com.sg.blog.data.PostDao;
 import com.sg.blog.data.UserDao;
+import com.sg.blog.model.User;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import static org.apache.tomcat.jni.Buffer.address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -17,22 +22,39 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class PostController {
-    
+
     @Autowired
     UserDao userdao;
-     @Autowired
+    @Autowired
     PostDao postdao;
-     
-     @GetMapping("/")
-     public String index(){
-         // post
-         return "index";
-     }
-     
-      
-     @GetMapping("post")
-     public String post(){
-         // post
-         return "post";
-     }
+
+    @GetMapping("index")
+    public String index() {
+        // post
+        return "index";
+    }
+
+    @GetMapping("post")
+    public String post() {
+        // post
+        return "post";
+    }
+
+    @GetMapping("login")
+    public String login() {
+        // post
+        return "login";
+    }
+
+    @GetMapping("signup")
+    public String signup() {
+        // post
+        return "signup";
+    }
+
+    @PostMapping("signup")
+    public String registerUser(User user) {
+        userdao.save(user);
+        return "redirect:/post";
+    }
 }
