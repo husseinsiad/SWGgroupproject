@@ -63,27 +63,26 @@
       <h2 class="text-center">Create Post</h2>
       <br /> 
       
-      <form type="form" action="addPost" method="POST">
+      <form type="form" action="post" method="POST">
         <div>
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" placeholder="Post title">
+                <input type="text" id="title" name="title" class="form-control" placeholder="Post title">
             </div>       
             <br />    
             <div class="form-group">
                 <label for="content">Content</label>
-                <textarea>Blog content goes here!</textarea>
+                <textarea id="content" name="content">Blog content goes here!</textarea>
             </div>         
             <br />    
             <div class="form-group">
                 <label for="category">Category</label>
-                <select id="inputState" class="form-control">
-                  <option selected>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
+                <select id="categoryid" name="categoryid" class="form-control">
+                  <option th:each="category : ${category}" 
+                     th:value="${category.categoryid}" 
+                      th:text="${category.name}">
+                      Category Name</option>
+                 
                 </select>
             </div>
         </div>
