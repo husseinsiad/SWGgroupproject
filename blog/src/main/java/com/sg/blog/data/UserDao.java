@@ -14,7 +14,6 @@ import org.springframework.stereotype.Repository;
  * @author siyaa
  */
 @Repository
-public interface UserDao extends JpaRepository<User,Integer>{
-
-    
+public interface UserDao extends JpaRepository<User, Integer>{
+   
 }

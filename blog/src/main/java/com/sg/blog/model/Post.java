@@ -27,7 +27,7 @@ public class Post {
 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
-    private int postId;
+    private int postid;
     
     @Column(nullable=false)
     private String title;
@@ -36,14 +36,13 @@ public class Post {
     private String content;
     
     @Column(nullable=false)
-    private LocalDateTime postDate;
+    private LocalDateTime postdate;
     
     @Column(nullable=false)
     private boolean status;
     
     @ManyToOne
     @JoinColumn(name = "userid", nullable = false)
-
     private User user;
 
     
@@ -52,6 +51,115 @@ public class Post {
             joinColumns = {@JoinColumn(name = "postid")},
             inverseJoinColumns = {@JoinColumn(name = "categoryid")})
     private List<Category> categories;
+
+    
+    
+    public int getPostid() {
+        return postid;
+    }
+
+    public void setPostid(int postid) {
+        this.postid = postid;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getPostdate() {
+        return postdate;
+    }
+
+    public void setPostdate(LocalDateTime postdate) {
+        this.postdate = postdate;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + this.postid;
+        hash = 23 * hash + Objects.hashCode(this.title);
+        hash = 23 * hash + Objects.hashCode(this.content);
+        hash = 23 * hash + Objects.hashCode(this.postdate);
+        hash = 23 * hash + (this.status ? 1 : 0);
+        hash = 23 * hash + Objects.hashCode(this.user);
+        hash = 23 * hash + Objects.hashCode(this.categories);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Post other = (Post) obj;
+        if (this.postid != other.postid) {
+            return false;
+        }
+        if (this.status != other.status) {
+            return false;
+        }
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.content, other.content)) {
+            return false;
+        }
+        if (!Objects.equals(this.postdate, other.postdate)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.categories, other.categories)) {
+            return false;
+        }
+        return true;
+    }
 
 
     
