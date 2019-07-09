@@ -28,4 +28,11 @@ public class PostController {
          // post
          return "index";
      }
+     
+      
+     @GetMapping("post")
+     public String post(){
+         // post
+         return "post";
+     }
 }
