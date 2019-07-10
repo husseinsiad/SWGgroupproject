@@ -30,7 +30,7 @@ public class PostController {
     UserDao userdao;
     @Autowired
     PostDao postdao;
-    
+
     @Autowired
     CategoryDao categorydao;
 
@@ -42,18 +42,39 @@ public class PostController {
     }
 
     @GetMapping("post")
-    public String post( Model model) {
-        List<Category> category=categorydao.findAll();
-        model.addAttribute("category",category);
+    public String post(Model model) {
+        List<Category> category = categorydao.findAll();
+        model.addAttribute("category", category);
         return "post";
     }
-    
+
     @PostMapping("post")
-    public String addPost(Post post){
-        User user= new User();
+    public String addPost(Post post) {
+        User user = new User();
         user.setUserid(1);
         LocalDateTime date;
-        date=LocalDateTime.now();
+        date = LocalDateTime.now();
+        post.setPostdate(date);
+        post.setUser(user);
+        postdao.save(post);
+        return "redirect:/index";
+    }
+
+    @GetMapping("updatePost")
+    public String updatePost(Model model, Integer id) {
+        Post posts = postdao.findById(id).orElse(null);
+        Category category = categorydao.findById(id).orElse(null);
+        model.addAttribute("category", category);
+        model.addAttribute("post", posts);
+        return "UpdatePost";
+    }
+
+    @PostMapping("updatePost")
+    public String performUpdatePost(Post post) {
+        User user = new User();
+        user.setUserid(1);// should be dynamic
+        LocalDateTime date;
+        date = LocalDateTime.now();
         post.setPostdate(date);
         post.setUser(user);
         postdao.save(post);
@@ -77,7 +98,7 @@ public class PostController {
         userdao.save(user);
         return "redirect:/login";
     }
-    
+
     @GetMapping("category")
     public String category() {
         // post
