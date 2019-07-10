@@ -1,6 +1,7 @@
 drop database if exists blogdb;
 create database blogdb;
 use blogdb;
+
 create table users(
 userid int auto_increment primary key,
 userName varchar(30) not null,
@@ -8,6 +9,7 @@ userName varchar(30) not null,
 userType varchar(30) not null,
 `password` varchar(50) not null
 );
+
 create table post(
 postid int auto_increment primary key,
 title varchar(50) not null,

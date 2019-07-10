@@ -37,7 +37,9 @@ public class PostController {
     @GetMapping("index")
     public String index(Model model) {
         List<Post> posts = postdao.findAll();
+        List<Category> categories = categorydao.findAll();
         model.addAttribute("post", posts);
+        model.addAttribute("category", categories);
         return "index";
     }
 
@@ -97,6 +99,7 @@ public class PostController {
     public String registerUser(User user) {
         userdao.save(user);
         return "redirect:/login";
+
     }
 
     @GetMapping("category")
@@ -105,9 +108,20 @@ public class PostController {
         return "category";
     }
 
+        
+
+
     @PostMapping("Category")
     public String registerCategory(Category category) {
         categorydao.save(category);
         return "redirect:/login";
     }
+    
+    @GetMapping("deletePost")
+    public String deletePost(int id){
+        postdao.deleteById(id);
+        return "redirect:/index";
+    }
+    
+  
 }
