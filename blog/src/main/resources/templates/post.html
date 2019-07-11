@@ -84,7 +84,7 @@
                       th:text="${category.name}">
                       Category Name</option>-->
                       <div class="form-check" th:each="category : ${category}">
-                        <input class="form-check-input" type="checkbox" th:value="${category.categoryid}"  id="categoryid">
+                          <input class="form-check-input" type="checkbox" th:value="${category.categoryid}"  id="categoryid" name="categoryid">
                         <label class="form-check-label" for="categoryid"  th:text="${category.name}">Check this custom checkbox</label>
                       </div>
                  
