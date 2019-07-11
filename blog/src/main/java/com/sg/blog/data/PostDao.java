@@ -5,6 +5,7 @@
  */
 package com.sg.blog.data;
 
+import com.sg.blog.model.Category;
 import com.sg.blog.model.Post;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +17,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PostDao extends JpaRepository<Post, Integer>{
-
     
 }

@@ -108,9 +108,6 @@ public class PostController {
         return "category";
     }
 
-        
-
-
     @PostMapping("Category")
     public String registerCategory(Category category) {
         categorydao.save(category);
@@ -123,5 +120,15 @@ public class PostController {
         return "redirect:/index";
     }
     
+    @GetMapping("postsByCategory")
+    public String getPostsByCategory(Integer id, Model model){
+        Category category = categorydao.findById(id).orElse(null);
+        List<Post> posts = category.getPost();
+        
+        model.addAttribute("post", posts);
+        model.addAttribute("category", category);
+        
+        return "postsByCategory";
+    }
   
 }

@@ -111,7 +111,7 @@
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0" th:each="category : ${category}">
                   <li>
-                    <a href="#" th:href="@{/postsByCategory(id=${category.categoryid})}" th:text="${category.name}">Web Design</a>
+                    <a href="#" th:text="${category.name}">Web Design</a>
                   </li>
                 </ul>
               </div>
