@@ -71,12 +71,10 @@
           <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
           <div class="card-body">
             <h2 class="card-title"  th:text="${post.title}">Post Title</h2>
-            <p class="card-text" th:utext="${#strings.abbreviate(post.content,200)}">Content</p>
-             <!--${#strings.substring(text,0,99)}-->   
-
-            <a href="#" th:href="@{/showPost(id=${post.postid})}" class="btn btn-primary"><i class="fas fa-arrow-circle-right"></i> Read More </a>
-            <a href="#" th:href="@{/deletePost(id=${post.postid})}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete </a>
-            <a href="#" th:href="@{/updatePost(id=${post.postid})}" class="btn btn-info"><i class="fas fa-edit"></i> Edit </a>
+            <p class="card-text" th:utext="${post.content}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+            <a h 
+             <a href="index" class="btn btn-primary"><i class="fas fa-arrow-circle-left"></i> Back</a> </a>
+             
           </div>
           <div class="card-footer text-muted" th:text="${post.postdate}">
             Posted on January 1, 2017 by

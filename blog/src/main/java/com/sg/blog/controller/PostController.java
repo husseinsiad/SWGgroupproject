@@ -12,7 +12,9 @@ import com.sg.blog.model.Category;
 import com.sg.blog.model.Post;
 import com.sg.blog.model.User;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +44,8 @@ public class PostController {
         model.addAttribute("category", categories);
         return "index";
     }
+    
+ 
 
     @GetMapping("post")
     public String post(Model model) {
@@ -49,13 +53,26 @@ public class PostController {
         model.addAttribute("category", category);
         return "post";
     }
+    
+     @GetMapping("showPost")
+    public String showpost(Integer id,Model model) {
+       Post posts = postdao.findById(id).orElse(null);
+        model.addAttribute("post", posts);
+        return "show";
+    }
 
     @PostMapping("post")
-    public String addPost(Post post) {
+    public String addPost(Post post, HttpServletRequest request) {
+        String[] category=request.getParameterValues("categoryid");
         User user = new User();
         user.setUserid(1);
         LocalDateTime date;
         date = LocalDateTime.now();
+        List<Category> categories= new ArrayList<>();
+        for(String Categoryid:category){
+        categories.add(categorydao.findById(Integer.parseInt(Categoryid)).orElse(null));
+        }
+        post.setCategories(categories);
         post.setPostdate(date);
         post.setUser(user);
         postdao.save(post);
