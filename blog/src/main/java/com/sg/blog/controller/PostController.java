@@ -54,10 +54,13 @@ public class PostController {
         return "post";
     }
     
-     @GetMapping("showPost")
-    public String showpost(Integer id,Model model) {
-       Post posts = postdao.findById(id).orElse(null);
+    @GetMapping("showPost")
+    public String showpost(Integer id, Model model) {
+        Post posts = postdao.findById(id).orElse(null);
+        List<Category> categories = categorydao.findAll();
         model.addAttribute("post", posts);
+        model.addAttribute("category", categories);
+        
         return "show";
     }
 
@@ -147,6 +150,18 @@ public class PostController {
         model.addAttribute("category",category);
         
         return "postsByCategory";
+    }
+    
+    @GetMapping("postsBySearch")
+    public String getPostsBySearch(HttpServletRequest request, Model model){
+        
+        List <Post> posts = postdao.findByPostContaining(request.getParameter("hashtag"));
+        List<Category> allCategories=categorydao.findAll();
+        model.addAttribute("post", posts);
+        model.addAttribute("categories", allCategories);
+//        model.addAttribute("search", search);
+        
+        return "postBySearch";
     }
   
 }

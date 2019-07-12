@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PostDao extends JpaRepository<Post, Integer>{
     
-    @Query("select * from post where content like '%?%'")
+    @Query("select p from post p where p.content like %?1%")
     List<Post> findByPostContaining(String contains);
     
 }
