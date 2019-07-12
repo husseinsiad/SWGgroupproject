@@ -141,9 +141,10 @@ public class PostController {
     public String getPostsByCategory(Integer id, Model model){
         Category category = categorydao.findById(id).orElse(null);
         List<Post> posts = category.getPost();
-        
+        List<Category> allCategories=categorydao.findAll();
         model.addAttribute("post", posts);
-        model.addAttribute("category", category);
+        model.addAttribute("categories", allCategories);
+        model.addAttribute("category",category);
         
         return "postsByCategory";
     }
