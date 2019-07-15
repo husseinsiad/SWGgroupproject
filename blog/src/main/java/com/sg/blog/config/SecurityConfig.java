@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http    
                 .authorizeRequests()
                     .antMatchers("/admin").hasRole("ADMIN")
-                    .antMatchers("/", "/index").permitAll()
+                    .antMatchers("/", "/index", "/show", "/postBySearch", "/postsByCategory").permitAll()
                     .antMatchers("/css/**", "/vendor/**", "/fonts/**").permitAll()
                     .anyRequest().hasRole("USER")
                 .and()
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .permitAll()
                 .and()
                 .logout()
-                    .logoutSuccessUrl("/")
+                    .logoutSuccessUrl("/index")
                     .permitAll();          
     }
     
