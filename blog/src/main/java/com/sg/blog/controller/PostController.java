@@ -11,6 +11,7 @@ import com.sg.blog.data.UserDao;
 import com.sg.blog.model.Category;
 import com.sg.blog.model.Post;
 import com.sg.blog.model.User;
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,14 @@ public class PostController {
 
     @Autowired
     CategoryDao categorydao;
+    
 
+
+    @GetMapping("/")
+    public String home() {
+        return "index";
+    }
+    
     @GetMapping("index")
     public String index(Model model) {
         List<Post> posts = postdao.findAll();
@@ -44,36 +52,35 @@ public class PostController {
         model.addAttribute("category", categories);
         return "index";
     }
-    
- 
 
     @GetMapping("post")
-    public String post(Model model) {
+    public String post(Model model ) {
         List<Category> category = categorydao.findAll();
         model.addAttribute("category", category);
         return "post";
     }
-    
+
     @GetMapping("showPost")
     public String showpost(Integer id, Model model) {
         Post posts = postdao.findById(id).orElse(null);
         List<Category> categories = categorydao.findAll();
         model.addAttribute("post", posts);
         model.addAttribute("category", categories);
-        
+
         return "show";
     }
 
     @PostMapping("post")
-    public String addPost(Post post, HttpServletRequest request) {
-        String[] category=request.getParameterValues("categoryid");
-        User user = new User();
-        user.setUserid(1);
+    public String addPost(Post post, HttpServletRequest request,Principal userInfo) {
+        String[] category = request.getParameterValues("categoryid");
+        User user = userdao.findByUsername(userInfo.getName());
+        //change
+        
         LocalDateTime date;
         date = LocalDateTime.now();
-        List<Category> categories= new ArrayList<>();
-        for(String Categoryid:category){
-        categories.add(categorydao.findById(Integer.parseInt(Categoryid)).orElse(null));
+        List<Category> categories = new ArrayList<>();
+        for (String Categoryid : category) {
+            categories.add(categorydao.findById(Integer.parseInt(Categoryid)).orElse(null));
         }
         post.setCategories(categories);
         post.setPostdate(date);
@@ -92,9 +99,8 @@ public class PostController {
     }
 
     @PostMapping("updatePost")
-    public String performUpdatePost(Post post) {
-        User user = new User();
-        user.setUserid(1);// should be dynamic
+    public String performUpdatePost(Post post, Principal userInfo) {
+        User user = userdao.findByUsername(userInfo.getName());
         LocalDateTime date;
         date = LocalDateTime.now();
         post.setPostdate(date);
@@ -103,24 +109,24 @@ public class PostController {
         return "redirect:/index";
     }
 
-    @GetMapping("login")
-    public String login() {
-        // post
-        return "login";
-    }
+//    @GetMapping("login")
+//    public String login() {
+//        // post
+//        return "login";
+//    }
 
-    @GetMapping("signup")
-    public String signup() {
-        // post
-        return "signup";
-    }
-
-    @PostMapping("signup")
-    public String registerUser(User user) {
-        userdao.save(user);
-        return "redirect:/login";
-
-    }
+//    @GetMapping("signup")
+//    public String signup() {
+//        // post
+//        return "signup";
+//    }
+//
+//    @PostMapping("signup")
+//    public String registerUser(User user) {
+//        userdao.save(user);
+//        return "redirect:/login";
+//
+//    }
 
     @GetMapping("category")
     public String category() {
@@ -131,37 +137,37 @@ public class PostController {
     @PostMapping("Category")
     public String registerCategory(Category category) {
         categorydao.save(category);
-        return "redirect:/login";
+        return "redirect:/post";
     }
-    
+
     @GetMapping("deletePost")
-    public String deletePost(int id){
+    public String deletePost(int id) {
         postdao.deleteById(id);
         return "redirect:/index";
     }
-    
+
     @GetMapping("postsByCategory")
-    public String getPostsByCategory(Integer id, Model model){
+    public String getPostsByCategory(Integer id, Model model) {
         Category category = categorydao.findById(id).orElse(null);
         List<Post> posts = category.getPost();
-        List<Category> allCategories=categorydao.findAll();
+        List<Category> allCategories = categorydao.findAll();
         model.addAttribute("post", posts);
         model.addAttribute("categories", allCategories);
-        model.addAttribute("category",category);
-        
+        model.addAttribute("category", category);
+
         return "postsByCategory";
     }
-    
+
     @GetMapping("postsBySearch")
-    public String getPostsBySearch(HttpServletRequest request, Model model){
-        
-        List <Post> posts = postdao.findByPostContaining(request.getParameter("hashtag"));
-        List<Category> allCategories=categorydao.findAll();
+    public String getPostsBySearch(HttpServletRequest request, Model model) {
+
+        List<Post> posts = postdao.findByPostContaining(request.getParameter("hashtag"));
+        List<Category> allCategories = categorydao.findAll();
         model.addAttribute("post", posts);
         model.addAttribute("categories", allCategories);
 //        model.addAttribute("search", search);
-        
+
         return "postBySearch";
     }
-  
+
 }
