@@ -47,6 +47,7 @@ public class PostController {
     @GetMapping("index")
     public String index(Model model) {
         List<Post> posts = postdao.findAll();
+        posts.stream().filter(p -> p.isStatus() == true);
         List<Category> categories = categorydao.findAll();
         model.addAttribute("post", posts);
         model.addAttribute("category", categories);
