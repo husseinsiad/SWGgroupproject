@@ -33,7 +33,6 @@ public class PostController {
     UserDao userdao;
     @Autowired
     PostDao postdao;
-
     @Autowired
     CategoryDao categorydao;
     
@@ -53,7 +52,6 @@ public class PostController {
                 truePosts.add(post);
             }
         }
-//        posts.stream().filter(p -> p.isStatus() == true);
         List<Category> categories = categorydao.findAll();
         model.addAttribute("post", truePosts);
         model.addAttribute("category", categories);

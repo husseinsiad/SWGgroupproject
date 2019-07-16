@@ -52,11 +52,10 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" href="admin">Admin</a>
           <a class="dropdown-item" href="login">Login</a>
+             <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" href="pendingPost">Pending Post</a>
          
         </div>
-      </li>
-           
-            
+      </li>   
         </ul>
       </div>
     </div>
@@ -70,7 +69,7 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Recent Posts
+        <h1 class="my-4">Show Post
           <small></small>
         </h1>
 
