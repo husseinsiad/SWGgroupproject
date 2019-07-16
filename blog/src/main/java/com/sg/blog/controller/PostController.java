@@ -41,7 +41,7 @@ public class PostController {
 
     @GetMapping("/")
     public String home() {
-        return "index";
+        return "redirect:/index";
     }
     
     @GetMapping("index")
