@@ -82,8 +82,8 @@
              <!--${#strings.substring(text,0,99)}-->   
 
             <a href="#" th:href="@{/showPost(id=${post.postid})}" class="btn btn-primary"><i class="fas fa-arrow-circle-right"></i> Read More </a>
-            <a href="#" th:href="@{/deletePost(id=${post.postid})}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete </a>
-            <a href="#" th:href="@{/updatePost(id=${post.postid})}" class="btn btn-info"><i class="fas fa-edit"></i> Edit </a>
+<!--            <a href="#" th:href="@{/deletePost(id=${post.postid})}" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete </a>
+            <a href="#" th:href="@{/updatePost(id=${post.postid})}" class="btn btn-info"><i class="fas fa-edit"></i> Edit </a>-->
           </div>
           <div class="card-footer text-muted">Posted on<span th:text="${#temporals.format(post.postdate, 'dd-MMM-yyyy')}"></span>
         </div>
@@ -92,6 +92,7 @@
 
 
       </div>
+        </div>
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
@@ -145,6 +146,7 @@
     </div>
     <!-- /.row -->
 
+  </div>
   </div>
   <!-- /.container -->
 
