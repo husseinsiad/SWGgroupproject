@@ -109,24 +109,7 @@ public class PostController {
         return "redirect:/index";
     }
 
-//    @GetMapping("login")
-//    public String login() {
-//        // post
-//        return "login";
-//    }
 
-//    @GetMapping("signup")
-//    public String signup() {
-//        // post
-//        return "signup";
-//    }
-//
-//    @PostMapping("signup")
-//    public String registerUser(User user) {
-//        userdao.save(user);
-//        return "redirect:/login";
-//
-//    }
 
     @GetMapping("category")
     public String category() {
