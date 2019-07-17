@@ -39,10 +39,7 @@ public class PostController {
     
 
 
-    @GetMapping("/")
-    public String home() {
-        return "index";
-    }
+  
     
     @GetMapping("index")
     public String index(Model model) {
