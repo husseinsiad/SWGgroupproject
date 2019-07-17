@@ -33,13 +33,15 @@ public class PostController {
     UserDao userdao;
     @Autowired
     PostDao postdao;
-
     @Autowired
     CategoryDao categorydao;
     
 
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/index";
+    }
 
-  
     
     @GetMapping("index")
     public String index(Model model) {
@@ -50,7 +52,6 @@ public class PostController {
                 truePosts.add(post);
             }
         }
-//        posts.stream().filter(p -> p.isStatus() == true);
         List<Category> categories = categorydao.findAll();
         model.addAttribute("post", truePosts);
         model.addAttribute("category", categories);

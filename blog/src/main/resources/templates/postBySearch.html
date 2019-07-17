@@ -51,11 +51,10 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" href="admin">Admin</a>
           <a class="dropdown-item" href="login">Login</a>
+             <a sec:authorize="hasRole('ROLE_ADMIN')" class="dropdown-item" href="pendingPost">Pending Post</a>
          
         </div>
-      </li>
-           
-            
+      </li>   
         </ul>
       </div>
     </div>
@@ -85,7 +84,7 @@
             <a href="#" th:href="@{/deletePost(id=${post.postid})}" class="btn btn-danger" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-trash-alt"></i> Delete </a>
             <a href="#" th:href="@{/updatePost(id=${post.postid})}" class="btn btn-info" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-edit"></i> Edit </a>
           </div>
-           <div class="card-footer text-muted">Posted on<span th:text="${#temporals.format(post.postdate, 'dd-MMM-yyyy')}"></span>
+           <div class="card-footer text-muted">Posted on <span th:text="${#temporals.format(post.postdate, 'dd-MMM-yyyy')}"></span>
             
           </div>
         </div>

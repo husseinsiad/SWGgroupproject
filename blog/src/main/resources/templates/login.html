@@ -18,8 +18,25 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+                    <div sec:authorize="isAuthenticated()">
+                <form class="form-inline" 
+                      method="POST" 
+                      action="/logout">
+                    <input type="hidden" 
+                            th:name="${_csrf.parameterName}" 
+                            th:value="${_csrf.token}"/>
+                    <label for="submit" class="text-white">
+                        Welcome: &nbsp; <span th:text="${#authentication.name}">
+                              </span>&nbsp;&nbsp;&nbsp;|
+                    </label>
+                    <button class="btn btn-link text-white" 
+                          id="submit" 
+                          type="submit">Logout</button>
+                </form>
+            </div>
       
     </div>
+        
   </nav>
     <body>
         <div class="container  mt-5">
