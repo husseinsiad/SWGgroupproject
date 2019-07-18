@@ -5,9 +5,11 @@
  */
 package com.sg.blog.controller;
 
+import com.sg.blog.data.AboutDao;
 import com.sg.blog.data.CategoryDao;
 import com.sg.blog.data.PostDao;
 import com.sg.blog.data.UserDao;
+import com.sg.blog.model.About;
 import com.sg.blog.model.Category;
 import com.sg.blog.model.Post;
 import com.sg.blog.model.User;
@@ -35,20 +37,21 @@ public class PostController {
     PostDao postdao;
     @Autowired
     CategoryDao categorydao;
-    
 
+    @Autowired
+    AboutDao aboutdao;
 
     @GetMapping("/")
     public String home() {
         return "redirect:/index";
     }
-    
+
     @GetMapping("index")
     public String index(Model model) {
         List<Post> posts = postdao.findAll();
         List<Post> truePosts = new ArrayList<Post>();
-        for(Post post : posts){
-            if(post.isStatus()){
+        for (Post post : posts) {
+            if (post.isStatus()) {
                 truePosts.add(post);
             }
         }
@@ -59,7 +62,7 @@ public class PostController {
     }
 
     @GetMapping("post")
-    public String post(Model model ) {
+    public String post(Model model) {
         List<Category> category = categorydao.findAll();
         model.addAttribute("category", category);
         return "post";
@@ -76,11 +79,11 @@ public class PostController {
     }
 
     @PostMapping("post")
-    public String addPost(Post post, HttpServletRequest request,Principal userInfo) {
+    public String addPost(Post post, HttpServletRequest request, Principal userInfo) {
         String[] category = request.getParameterValues("categoryid");
         User user = userdao.findByUsername(userInfo.getName());
         //change
-        
+
         LocalDateTime date;
         date = LocalDateTime.now();
         List<Category> categories = new ArrayList<>();
@@ -94,6 +97,48 @@ public class PostController {
         return "redirect:/index";
     }
 
+    @GetMapping("AboutUs")
+    public String displayAboutUs() {
+        return "AboutUs";
+    }
+
+    @PostMapping("about")
+    public String createAboutUs(About about, HttpServletRequest request, Principal userInfo) {
+        User user = userdao.findByUsername(userInfo.getName());
+        about.setUser(user);
+        aboutdao.save(about);
+        return "redirect:/ShowAboutUs";
+    }
+
+    @GetMapping("ShowAboutUs")
+    public String showAboutUs(Model model) {
+        List<About> about = aboutdao.findAll();
+        model.addAttribute("about", about);
+        return "ShowAboutUs";
+    }
+
+    @GetMapping("EditAboutUs")
+    public String updateAbout(Model model, Integer id) {
+        About about = aboutdao.findById(id).orElse(null);
+        model.addAttribute("about", about);
+        return "EditAboutUs";
+    }
+    
+    @PostMapping("EditAboutUs")
+    public String performEditAboutUs(About about, Principal userInfo) {
+        User user = userdao.findByUsername(userInfo.getName());
+        
+        about.setUser(user);
+        aboutdao.save(about);
+        return "redirect:/ShowAboutUs";
+    }
+    
+    @GetMapping("deleteAbout")
+    public String deleteAbout(int id) {
+        aboutdao.deleteById(id);
+        return "redirect:/ShowAboutUs";
+    }
+    
     @GetMapping("updatePost")
     public String updatePost(Model model, Integer id) {
         Post posts = postdao.findById(id).orElse(null);
@@ -113,8 +158,6 @@ public class PostController {
         postdao.save(post);
         return "redirect:/index";
     }
-
-
 
     @GetMapping("category")
     public String category() {
