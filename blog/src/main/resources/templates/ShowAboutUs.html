@@ -40,10 +40,7 @@
           </li>
          
           <li class="nav-item">
-            <a class="nav-link" href="ShowAboutUs">About Us</a>
-          </li>
-             <li class="nav-item">
-            <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-link" href="AboutUs">Create About Us</a>
+            <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-link" href="AboutUs">About Us</a>
           </li>
            <li class="nav-item">
             <a sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" class="nav-link" href="post">Post</a>
@@ -77,29 +74,27 @@
       <!-- Blog Entries Column -->
       <div class="col-md-8">
 
-        <h1 class="my-4">Recent Posts
+        <h1 class="my-4">About Us
           <small></small>
         </h1>
 
         <!-- Blog Post -->
-        <div class="card mb-4" th:each="post : ${post}">
+        <div class="card mb-4" th:each="about : ${about}">
           <!--<img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">-->
           <div class="card-body">
-            <h2 class="card-title"  th:text="${post.title}">Post Title</h2>
-            <p class="card-text" th:utext="${#strings.abbreviate(post.content,200)}">Content</p>
+            <h2 class="card-title"  th:text="${about.title}"> Title</h2>
+            <p class="card-text" th:utext="${about.content}">Content</p>
              <!--${#strings.substring(text,0,99)}-->   
 
-            <a href="#" th:href="@{/showPost(id=${post.postid})}" class="btn btn-primary" ><i class="fas fa-arrow-circle-right"></i> Read More </a>
-            <a href="#" th:href="@{/deletePost(id=${post.postid})}" class="btn btn-danger " sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-trash-alt"></i> Delete </a>
-            <a href="#" th:href="@{/updatePost(id=${post.postid})}" class="btn btn-info" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-edit"></i> Edit </a>
+<!--            <a href="#" th:href="@{/showPost(id=${post.postid})}" class="btn btn-primary" ><i class="fas fa-arrow-circle-right"></i> Read More </a>
+-->            <a href="#" th:href="@{/deleteAbout(id=${about.id})}" class="btn btn-danger " sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-trash-alt"></i> Delete </a>
+            <a href="#" th:href="@{/EditAboutUs(id=${about.id})}" class="btn btn-info" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fas fa-edit"></i> Edit </a>
           </div>
-          <div class="card-footer text-muted">Posted on <span th:text="${#temporals.format(post.postdate, 'dd-MMM-yyyy')}"></span>
-            
-          </div>
+         
         </div>
-
+      
       </div>
-        
+       
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
@@ -120,20 +115,7 @@
         </form>
 
         <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0" th:each="category : ${category}">
-                  <li>
-                    <a href="#" th:href="@{/postsByCategory(id=${category.categoryid})}" th:text="${category.name}">Web Design</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         <!-- Side Widget -->
         <div class="card my-4">

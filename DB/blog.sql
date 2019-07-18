@@ -31,6 +31,13 @@ postDate datetime not null,
  foreign key (userid)references `user`(id)
 );
 
+create table about(
+id int auto_increment primary key,
+title varchar(50) not null,
+content text not null,
+ userid int not null,
+ foreign key (userid)references `user`(id)
+);
 create table category(
 categoryid int auto_increment primary key,
 `name` varchar(50) not null
