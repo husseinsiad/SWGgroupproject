@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobalInDB(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetails).passwordEncoder(bCryptPasswordEncoder());
     }
-        @Bean
+    @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http    
                 .authorizeRequests()
                     .antMatchers("/admin").hasRole("ADMIN")
-                    .antMatchers("/", "/index", "/show", "/postBySearch", "/postsByCategory", "/ShowAboutUs").permitAll()
+                    .antMatchers("/", "/index", "/show", "/postBySearch", "/postsByCategory", "/ShowAboutUs", "/showPost").permitAll()
                     .antMatchers("/css/**", "/vendor/**", "/fonts/**").permitAll()
                     .anyRequest().hasRole("USER")
                 .and()

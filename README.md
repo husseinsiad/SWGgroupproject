@@ -1,3 +1,0 @@
-# SWGgroupproject
-
-test

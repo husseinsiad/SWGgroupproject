@@ -35,9 +35,10 @@ create table about(
 id int auto_increment primary key,
 title varchar(50) not null,
 content text not null,
- userid int not null,
- foreign key (userid)references `user`(id)
+userid int not null,
+foreign key (userid)references `user`(id)
 );
+
 create table category(
 categoryid int auto_increment primary key,
 `name` varchar(50) not null
@@ -60,6 +61,9 @@ insert into `role`(`id`,`role`)
     
 insert into `user_role`(`user_id`,`role_id`)
     values(1,1),(1,2),(2,2);
+    
+UPDATE user SET password = '$2a$10$S8nFUMB8YIEioeWyap24/ucX.dC6v9tXCbpHjJVQUkrXlrH1VLaAS' WHERE id = 1;
+UPDATE user SET password = '$2a$10$S8nFUMB8YIEioeWyap24/ucX.dC6v9tXCbpHjJVQUkrXlrH1VLaAS' WHERE id = 2;
 
 
 
